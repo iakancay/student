@@ -42,7 +42,7 @@ function getStudentsFromStorage() {
 function addStudentToStorage(newStudent) {
   let students = getStudentsFromStorage();
   students.push(newStudent);
-  console.log(students);
+  // console.log(students);
   localStorage.setItem("students", JSON.stringify(students));
 }
 
