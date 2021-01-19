@@ -13,7 +13,14 @@ function eventListeners() {
   document.addEventListener("DOMContentLoaded", addAllStudentToList);
   secondCardBody.addEventListener("click", deleteStudent);
   filter.addEventListener("keyup", filterStudent);
- 
+  clearStudents.addEventListener("click",clearAllStudents);
+}
+function clearAllStudents(){
+  if(confirm("Do you want to remove all students?")){
+    studentList.innerHTML=""; 
+    localStorage.clear("students");
+  }
+
 }
 function filterStudent(e) {
   const filterValue = e.target.value.toLowerCase();
