@@ -12,6 +12,20 @@ function eventListeners() {
   form.addEventListener("submit", addStudent);
   document.addEventListener("DOMContentLoaded", addAllStudentToList);
   secondCardBody.addEventListener("click", deleteStudent);
+  filter.addEventListener("keyup", filterStudent);
+ 
+}
+function filterStudent(e) {
+  const filterValue = e.target.value.toLowerCase();
+  const listItems = document.querySelectorAll(".list-group-item");
+  listItems.forEach(function (listItem) {
+    const text = listItem.textContent.toLowerCase();
+    if (text.indexOf(filterValue) === -1) {
+      listItem.setAttribute("style", "display:none !important");
+    } else {
+      listItem.setAttribute("style", "display:block");
+    }
+  });
 }
 function deleteStudent(e) {
   if (e.target.className === "fa fa-remove") {
