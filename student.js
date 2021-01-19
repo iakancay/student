@@ -10,9 +10,34 @@ eventListeners();
 
 function eventListeners() {
   form.addEventListener("submit", addStudent);
+  document.addEventListener("DOMContentLoaded", addAllStudentToList);
+  secondCardBody.addEventListener("click", deleteStudent);
+}
+function deleteStudent(e) {
+  if (e.target.className === "fa fa-remove") {
+    e.target.parentElement.parentElement.remove();
+    deleteStudentFromStorage(e.target.parentElement.parentElement.textContent);
+    showAlert("success", "Student removed from list successfully");
+  }
+}
+function deleteStudentFromStorage(delStudent) {
+  let students = getStudentsFromStorage();
+  students.forEach(function (student, index) {
+    if (student === delStudent) {
+      students.splice(index, 1);
+    }
+  });
+  localStorage.setItem("students", JSON.stringify(students));
 }
 
+function addAllStudentToList() {
+  let students = getStudentsFromStorage();
+  students.forEach(function (newStudent) {
+    addStudentsToList(newStudent);
+  });
+}
 function addStudent(e) {
+  let students = getStudentsFromStorage();
   const newStudent = studentInput.value.trim();
   const male = document.getElementById("male");
   const female = document.getElementById("female");
@@ -21,6 +46,8 @@ function addStudent(e) {
     showAlert("danger", "Ooops! Write name of the student..");
   } else if (male.checked === false && female.checked === false) {
     showAlert("danger", "Oopss! Choose the gender..");
+  } else if (students.includes(newStudent)) {
+    showAlert("danger", "Oopss! You added this student before.");
   } else {
     addStudentsToList(newStudent);
     addStudentToStorage(newStudent);
