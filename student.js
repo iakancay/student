@@ -13,9 +13,9 @@ function eventListeners() {
   document.addEventListener("DOMContentLoaded", addAllStudentToList);
   secondCardBody.addEventListener("click", deleteStudent);
   filter.addEventListener("keyup", filterStudent);
-  clearStudents.addEventListener("click",clearAllStudents);
+  clearStudents.addEventListener("click",removeAllStudents);
 }
-function clearAllStudents(){
+function removeAllStudents(){
   if(confirm("Do you want to remove all students?")){
     studentList.innerHTML=""; 
     localStorage.clear("students");
